@@ -15,8 +15,8 @@ module.exports = {
         inter: ["Inter", "sans-serif"],
       },
       colors: {
-        "primary-red": "#F61726",
-        "primary-lightred": "#FAF8F8",
+        "primary-red": "#3BA256",
+        "primary-lightred": "#F8FAF8",
         "primary-gray": "#D9D9D9",
       },
 

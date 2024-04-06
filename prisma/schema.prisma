@@ -12,11 +12,13 @@ datasource db {
 
 model User {
   id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  role           Int
   name           String?
   email          String?   @unique
   emailVerified  DateTime?
   image          String?
   hashedPassword String?
+  activated      Int
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
 

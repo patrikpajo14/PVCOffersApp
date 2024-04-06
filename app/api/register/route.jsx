@@ -5,6 +5,8 @@ import { NextResponse } from "next/server";
 export async function POST(request) {
   const body = await request.json();
   const { name, email, password } = body;
+  var role = 0; //0=user, 1=admin
+  var activated = 0; //0=baned, 1=activated
 
   if (!name || !email || !password) {
     return new NextResponse("Missing Fields", { status: 400 });
@@ -24,9 +26,11 @@ export async function POST(request) {
 
   const user = await prisma.user.create({
     data: {
+      role,
       name,
       email,
       hashedPassword,
+      activated,
     },
   });
 

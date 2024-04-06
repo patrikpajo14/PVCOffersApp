@@ -19,12 +19,12 @@
 }
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #f61726;
+  background: #42b460;
   border-radius: 20px;
 }
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #cf121f;
+  background: #36964f;
 }
 
 body.no-scroll {
@@ -57,8 +57,8 @@ body.sidebar-open .sidebar {
 
 .sidebar-link.active .sidebar-icon,
 .sidebar-link:hover .sidebar-icon {
-  filter: brightness(0) invert(33%) sepia(85%) saturate(5403%)
-    hue-rotate(342deg) brightness(91%) contrast(115%);
+  filter: brightness(0) invert(52%) sepia(80%) saturate(344%) hue-rotate(83deg)
+    brightness(87%) contrast(91%);
 }
 
 .auth-page:before {

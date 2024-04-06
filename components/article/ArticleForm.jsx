@@ -142,7 +142,7 @@ export default function ArticleForm({
         const color = formParams.colors.find(
           (color) => color.id === data.colorId
         );
-        const blinds = formParams.blindsTypes.find((blinds) => {
+        const blinds = formParams.blindsTypes.find(( blinds) => {
           if (data?.blindsTypeId === "") {
             return blinds.name === "none";
           } else {
