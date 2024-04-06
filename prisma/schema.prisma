@@ -1,0 +1,132 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  name           String?
+  email          String?   @unique
+  emailVerified  DateTime?
+  image          String?
+  hashedPassword String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  accounts Account[]
+  offers Offer[]
+}
+
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.String
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+  model Places{
+    id         String  @id @default(auto()) @map("_id") @db.ObjectId
+    place_name String  @unique
+    offers     Offer[]
+ }
+
+model Offer{
+  id                    String @id @default(auto()) @map("_id") @db.ObjectId
+  customer_name         String
+  customer_address      String
+  customer_phone_number String
+  customer_email        String
+  create_date           DateTime @default(now())
+  status                String
+  place_id              String @db.ObjectId
+  place                 Places @relation(fields: [place_id], references: [id])
+  user_id               String @db.ObjectId
+  user                  User @relation(fields: [user_id], references: [id])
+
+  articleIDs            String[] @db.ObjectId
+  articles              Article[]   @relation(fields: [articleIDs], references: [id])
+  articleList           Json[] @default([])
+ }
+
+model Article{
+    id             String @id @default(auto()) @map("_id") @db.ObjectId
+    name           String
+    amount         Int
+    width          Int
+    height         Int
+    opening        String
+    substock       String
+    price          Int
+
+    typeId         String @db.ObjectId
+    type           Type @relation(fields: [typeId], references: [id])
+
+    panelId        String @db.ObjectId
+    panel          Panel @relation(fields: [panelId], references: [id])
+
+    colorId        String @db.ObjectId
+    color          Color @relation(fields: [colorId], references: [id])
+
+    blindsId       String @db.ObjectId
+    blinds         BlindsType @relation(fields: [blindsId], references: [id])
+    blindsWidth    Int?
+    blindsHeight    Int?
+
+    extrasId       String @db.ObjectId
+    extras         NetsType @relation(fields: [extrasId], references: [id])
+    extrasWidth    Int?
+    extrasHeight   Int?
+
+    offersIDs      String[] @db.ObjectId
+    offers         Offer[] @relation(fields: [offersIDs], references: [id])
+}
+
+model Type{
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  name  String @unique
+  image String?
+  articles Article[]
+}
+
+model Panel{
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  name     String @unique
+  articles Article[]
+}
+
+model Color{
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  name     String @unique
+  articles Article[]
+}
+
+model BlindsType{
+   id      String @id @default(auto()) @map("_id") @db.ObjectId 
+   name    String @unique
+   blinds  Article[]
+}
+
+model NetsType{
+   id      String @id @default(auto()) @map("_id") @db.ObjectId 
+   name    String @unique
+   extras  Article[]
+}
