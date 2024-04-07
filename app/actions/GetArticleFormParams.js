@@ -6,7 +6,6 @@ const fetchParams = async () => {
   const panels = await axios.get(`/api/panel`);
   const colors = await axios.get(`/api/colors`);
   const blindsType = await axios.get(`/api/blindsType`);
-  const extrasType = await axios.get(`/api/extrasType`);
 
   return {
     data: {
@@ -14,7 +13,6 @@ const fetchParams = async () => {
       panels: panels.data,
       colors: colors.data,
       blindsTypes: blindsType.data,
-      extrasTypes: extrasType.data,
     },
   };
 };

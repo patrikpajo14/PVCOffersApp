@@ -57,12 +57,6 @@ const Article = ({
           </div>
           <div className="w-[100%] md:w-[30%] flex flex-wrap gap-y-1 gap-x-3 md:gap-3 lg:w-auto lg:flex-col text-sm md:text-[16px]">
             <p>
-              mosquito nets: {article?.extras?.name}{" "}
-              {article?.extrasWidth
-                ? `${article?.extrasWidth}x${article?.extrasHeight}`
-                : ""}
-            </p>
-            <p>
               blinds: {article?.blinds?.name}{" "}
               {article?.blindsWidth
                 ? `${article?.blindsWidth}x${article?.blindsHeight}`

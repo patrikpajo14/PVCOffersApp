@@ -93,11 +93,6 @@ model Article{
     blindsWidth    Int?
     blindsHeight    Int?
 
-    extrasId       String @db.ObjectId
-    extras         NetsType @relation(fields: [extrasId], references: [id])
-    extrasWidth    Int?
-    extrasHeight   Int?
-
     offersIDs      String[] @db.ObjectId
     offers         Offer[] @relation(fields: [offersIDs], references: [id])
 }
@@ -125,10 +120,4 @@ model BlindsType{
    id      String @id @default(auto()) @map("_id") @db.ObjectId 
    name    String @unique
    blinds  Article[]
-}
-
-model NetsType{
-   id      String @id @default(auto()) @map("_id") @db.ObjectId 
-   name    String @unique
-   extras  Article[]
 }

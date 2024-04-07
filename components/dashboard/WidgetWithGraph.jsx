@@ -15,8 +15,8 @@ const WidgetWithGraph = ({ title, doneNumber, totalNumber }) => {
       {
         label: "%",
         data: [done, rest],
-        backgroundColor: ["#F61726", "#F5ECEC"],
-        borderColor: ["#F61726", "#F5ECEC"],
+        backgroundColor: ["#3BA256", "#F5ECEC"],
+        borderColor: ["#3BA256", "#F5ECEC"],
         borderWidth: 1,
       },
     ],

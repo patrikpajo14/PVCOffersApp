@@ -32,12 +32,6 @@ const Administration = () => {
           btnText={"Add new"}
           url={"/api/blindsType"}
         />
-        <AdministrationForm
-          title={"Add new extras type"}
-          inputLabel={"extras type"}
-          btnText={"Add new"}
-          url={"/api/extrasType"}
-        />
       </div>
     </section>
   );

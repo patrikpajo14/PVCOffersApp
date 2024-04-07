@@ -57,9 +57,6 @@ export async function PUT(request, { params }) {
       blindsTypeId,
       blindsWidth,
       blindsHeight,
-      extrasTypeId,
-      extrasWidth,
-      extrasHeight,
       price,
     } = body;
 
@@ -106,11 +103,6 @@ export async function PUT(request, { params }) {
         },
         blindsWidth: blindsWidth,
         blindsHeight: blindsHeight,
-        extras: {
-          connect: { id: extrasTypeId },
-        },
-        extrasWidth: extrasWidth,
-        extrasHeight: extrasHeight,
       },
       where: {
         id: id,

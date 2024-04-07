@@ -15,9 +15,6 @@ export async function POST(request) {
     blindsTypeId,
     blindsWidth,
     blindsHeight,
-    extrasTypeId,
-    extrasWidth,
-    extrasHeight,
     price,
   } = body;
 
@@ -26,14 +23,6 @@ export async function POST(request) {
       id: typeId,
     },
   });
-
-  const defaultBlind = await prisma.blindsType.findUnique({
-    where: {
-      name: "none",
-    },
-  });
-
-  console.log("DEFAULT BLIND", defaultBlind);
 
   const name = type.name;
 
@@ -74,13 +63,6 @@ export async function POST(request) {
       },
       blindsWidth: blindsWidth,
       blindsHeight: blindsHeight,
-      extras: {
-        connect: {
-          id: extrasTypeId === "" ? "66118e1c581fefc121ecebd6" : extrasTypeId,
-        },
-      },
-      extrasWidth: extrasWidth,
-      extrasHeight: extrasHeight,
     },
   });
 
@@ -95,7 +77,6 @@ export async function GET() {
         panel: true,
         color: true,
         blinds: true,
-        extras: true,
       },
     });
     return NextResponse.json(articles);

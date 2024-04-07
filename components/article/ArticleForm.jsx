@@ -27,6 +27,8 @@ export default function ArticleForm({
   const { mutate: addArticle } = useAddArticle();
   const { mutate: updateArticle } = useUpdateArticle();
 
+  console.log("artiucle", article);
+
   const {
     data: objectId,
     isLoading: idLoading,
@@ -35,7 +37,6 @@ export default function ArticleForm({
 
   const [loading, setLoading] = useState(false);
   const [haveBlinds, setHaveBlinds] = useState(false);
-  const [haveExtras, setHaveExtras] = useState(false);
 
   const ArticleSchema = Yup.object().shape({
     typeId: Yup.string().required("Required"),
@@ -50,15 +51,6 @@ export default function ArticleForm({
       ? Yup.number().required("Required")
       : Yup.number().notRequired(),
     blindsHeight: haveBlinds
-      ? Yup.number().required("Required")
-      : Yup.number().notRequired(),
-    extrasTypeId: haveExtras
-      ? Yup.string().required("Required")
-      : Yup.string().notRequired(),
-    extrasWidth: haveExtras
-      ? Yup.number().required("Required")
-      : Yup.number().notRequired(),
-    extrasHeight: haveExtras
       ? Yup.number().required("Required")
       : Yup.number().notRequired(),
     price: Yup.number().required("Required"),
@@ -78,9 +70,6 @@ export default function ArticleForm({
       blindsTypeId: article?.blindsId || "",
       blindsWidth: article?.blindsWidth || 0,
       blindsHeight: article?.blindsHeight || 0,
-      extrasTypeId: article?.extrasId || "",
-      extrasWidth: article?.extrasWidth || 0,
-      extrasHeight: article?.extrasHeight || 0,
       price: article?.price || 0,
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -105,10 +94,6 @@ export default function ArticleForm({
       article?.blinds?.name === "none"
         ? setHaveBlinds(false)
         : setHaveBlinds(true);
-
-      article?.extras?.name === "none"
-        ? setHaveExtras(false)
-        : setHaveExtras(true);
     }
     if (!isEdit) {
       reset(defaultValues);
@@ -142,19 +127,11 @@ export default function ArticleForm({
         const color = formParams.colors.find(
           (color) => color.id === data.colorId
         );
-        const blinds = formParams.blindsTypes.find(( blinds) => {
+        const blinds = formParams.blindsTypes.find((blinds) => {
           if (data?.blindsTypeId === "") {
             return blinds.name === "none";
           } else {
             blinds.id === data?.blindsTypeId;
-          }
-        });
-
-        const extras = formParams.extrasTypes.find((extras) => {
-          if (data?.extrasTypeId === "") {
-            return extras.name === "none";
-          } else {
-            extras.id === data?.blindsTypeId;
           }
         });
 
@@ -167,7 +144,6 @@ export default function ArticleForm({
           panel,
           color,
           blinds,
-          extras,
         };
         createCustomArticle(customArticle);
         refetchId();
@@ -323,61 +299,6 @@ export default function ArticleForm({
                   required
                   register={register}
                   id="blindsHeight"
-                  label="Height (mm)"
-                  type="number"
-                />
-              </>
-            )}
-          </div>
-        </div>
-        <div className="mb-7">
-          <h2 className="text-xl font-bold mb-4">Mosquito nets</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-5">
-            <div className="flex items-center gap-2 justify-between">
-              <RadioGroup
-                title={"Do you want extra nets?"}
-                handleOnChange={() => {
-                  setHaveExtras(!haveExtras);
-                }}
-                defaultValue={haveExtras ? "yes" : "no"}
-                register={register}
-                inputs={[
-                  { id: "extrasYes", name: "extras", value: "yes" },
-                  { id: "extrasNo", name: "extras", value: "no" },
-                ]}
-              />
-            </div>
-            {haveExtras && (
-              <>
-                <Select
-                  label={"Type"}
-                  placeholder={"Select type..."}
-                  disabled={loading}
-                  name={"extrasTypeId"}
-                  errors={errors}
-                  register={register}
-                >
-                  {formParams?.extrasTypes?.map((option, index) => (
-                    <option key={index} value={option.id}>
-                      {option.name}
-                    </option>
-                  ))}
-                </Select>
-                <Input
-                  disabled={loading}
-                  errors={errors}
-                  required
-                  register={register}
-                  id="extrasWidth"
-                  label="Width (mm)"
-                  type="number"
-                />
-                <Input
-                  disabled={loading}
-                  errors={errors}
-                  required
-                  register={register}
-                  id="extrasHeight"
                   label="Height (mm)"
                   type="number"
                 />

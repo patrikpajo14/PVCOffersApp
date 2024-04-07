@@ -14,8 +14,6 @@ const OfferView = () => {
 
   const { data: offer, isLoading } = useGetOffersById(params.id);
 
-  console.log(offer);
-
   return (
     <section className="max-h-[calc(100vh - 50px)]">
       <PageSubheader
@@ -29,12 +27,14 @@ const OfferView = () => {
                   : ""}
               </p>
             </div>
-            <Link
-              href={`/dashboard/offers/${params.id}`}
-              className="outline_btn"
-            >
-              Edit offer
-            </Link>
+            {offer?.status !== "done" && (
+              <Link
+                href={`/dashboard/offers/${params.id}`}
+                className="outline_btn"
+              >
+                Edit offer
+              </Link>
+            )}
             <Link href={"/dashboard/offers/create"} className="primary_btn">
               New offer
             </Link>
