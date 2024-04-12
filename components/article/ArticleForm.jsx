@@ -27,8 +27,6 @@ export default function ArticleForm({
   const { mutate: addArticle } = useAddArticle();
   const { mutate: updateArticle } = useUpdateArticle();
 
-  console.log("artiucle", article);
-
   const {
     data: objectId,
     isLoading: idLoading,

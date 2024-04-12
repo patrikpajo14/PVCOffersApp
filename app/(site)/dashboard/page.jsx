@@ -1,10 +1,13 @@
+'use client'
 import PageSubheader from "@/components/PageSubheader";
 import WidgetsRow from "@/components/dashboard/WidgetsRow";
 import { OffersTable } from "@/components/offers";
 import Link from "next/link";
 import React from "react";
+import useAuthStore from "@/app/store/AuthStore";
 
 const Dashboard = () => {
+    const {user} = useAuthStore();
   return (
     <section>
       <PageSubheader

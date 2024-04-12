@@ -3,33 +3,36 @@ import useAuthStore from "@/app/store/AuthStore";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import {useEffect} from "react";
 
-const Sidebar = () => {
+const Sidebar = ({currentUser}) => {
   const pathname = usePathname();
-  const { user } = useAuthStore();
 
-  console.log("user", user);
+  const {setUser} = useAuthStore();
+  useEffect(() => {
+    if(currentUser) setUser(currentUser);
+  }, [currentUser]);
 
   const sidebarLinks = [
     "/",
     "offers",
     "article-list",
     "administration",
-    user?.role === 1 && "users",
+    currentUser?.role === 1 && "users",
   ];
   const sidebarTranslate = [
     "Dashboard",
     "Offers",
     "Articles",
     "Administration",
-    user?.role === 1 && "Users",
+    currentUser?.role === 1 && "Users",
   ];
   const sidebarIcons = [
     "/assets/icons/ico_dashboard.svg",
     "/assets/icons/ico_offers.svg",
     "/assets/icons/ico_article.svg",
     "/assets/icons/ico_administration.svg",
-    user?.role === 1 && "/assets/icons/ico_users.svg",
+    currentUser?.role === 1 && "/assets/icons/ico_users.svg",
   ];
 
   return (
@@ -57,33 +60,30 @@ const Sidebar = () => {
         <ul>
           {sidebarLinks.map((link, index) => {
             const isActive = pathname.endsWith(link);
-            console.log("link", link);
-            return (
-              <>
-                {link !== false && (
+            if(link !== false){
+              return (
                   <li className="relative" key={index}>
                     <Link
-                      href={`/dashboard/${link}`}
-                      onClick={() => {
-                        document.body.classList.remove("sidebar-open");
-                      }}
-                      className={
-                        isActive ? "sidebar-link active" : "sidebar-link"
-                      }
+                        href={`/dashboard/${link}`}
+                        onClick={() => {
+                          document.body.classList.remove("sidebar-open");
+                        }}
+                        className={
+                          isActive ? "sidebar-link active" : "sidebar-link"
+                        }
                     >
                       <Image
-                        src={sidebarIcons[index]}
-                        alt={sidebarTranslate[index]}
-                        width="25"
-                        height="25"
-                        className={"sidebar-icon"}
+                          src={sidebarIcons[index]}
+                          alt={sidebarTranslate[index]}
+                          width="25"
+                          height="25"
+                          className={"sidebar-icon"}
                       />
                       {sidebarTranslate[index]}
                     </Link>
                   </li>
-                )}
-              </>
-            );
+              );
+            }
           })}
         </ul>
       </div>

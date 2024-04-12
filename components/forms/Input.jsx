@@ -53,7 +53,7 @@ const Input = ({
               sm:text-md 
             `,
             sx,
-            errors[id] && "border-primary-red focus:border-primary-red",
+            errors[id] && "border-red-500 bg-red-50 focus:border-red-500",
             disabled && "opacity-50 cursor-default"
           )}
         />

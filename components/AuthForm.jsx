@@ -18,11 +18,9 @@ const AuthForm = () => {
   const [variant, setVariant] = useState("LOGIN");
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log("AuthForm", session);
   useEffect(() => {
     if (session?.status === "authenticated") {
       router.push("/dashboard");
-      console.log("Effect push");
     }
   }, [session?.status, router]);
 
@@ -63,7 +61,6 @@ const AuthForm = () => {
           if (callback?.error) {
             toast.error("Invalid credentials!");
           }
-
           if (callback?.ok) {
             toast.success("User has been registered");
             router.push("/dashboard");
@@ -82,7 +79,6 @@ const AuthForm = () => {
           if (callback?.error) {
             toast.error(callback.error);
           }
-
           if (callback?.ok && !callback?.error) {
             toast.success("Logged in successfully!");
             router.push("/dashboard");

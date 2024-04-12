@@ -30,3 +30,20 @@ export const useUpdateUserStatus = () => {
     },
   });
 };
+
+const deleteUser = (id) => {
+  return axios.delete(`/api/users/${id}`);
+};
+
+export const useDeleteUser = () => {
+  const queryClient = useQueryClient();
+  return useMutation((id) => deleteUser(id), {
+    onSuccess: () => {
+      toast.success("User deleted successfuly!");
+      queryClient.invalidateQueries("users");
+    },
+    onError: () => {
+      toast.error("Something went wrong!");
+    },
+  });
+};

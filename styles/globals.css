@@ -45,6 +45,12 @@ body.sidebar-open .sidebar {
   min-height: 100vh;
   padding: 0 37px;
 }
+.container-max {
+  width: 100vw;
+  margin-left: auto;
+  min-height: 100vh;
+  padding: 0 40px;
+}
 
 .sidebar ul {
   margin-top: 65px;
@@ -94,6 +100,9 @@ body.sidebar-open .sidebar {
 @media screen and (max-width: 768px) {
   .container-fluid {
     width: 100%;
+    padding: 0 15px;
+  }
+  .container-max {
     padding: 0 15px;
   }
 }
@@ -178,7 +187,7 @@ td {
 }
 
 .dropdown {
-  @apply absolute right-0 top-full mt-3 w-full p-5 rounded-lg bg-white min-w-[210px] flex flex-col gap-3 shadow-main;
+  @apply absolute right-0 top-full mt-3 w-full p-5 rounded-lg bg-white min-w-[210px] flex flex-col gap-3 shadow-main z-50;
 }
 
 .dropdown_link {

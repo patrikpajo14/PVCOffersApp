@@ -64,16 +64,6 @@ export default function UsersTableRow({ row, onDeleteRow, onEditRow }) {
         </td>
 
         <td align="right" style={{ minWidth: "140px" }}>
-          {row?.status !== "done" && (
-            <IconButton onClick={onEditRow}>
-              <Image
-                src="/assets/icons/ico_edit.svg"
-                alt="edit"
-                width={20}
-                height={20}
-              />
-            </IconButton>
-          )}
           <IconButton
             onClick={() => {
               setOpenConfirm(true);

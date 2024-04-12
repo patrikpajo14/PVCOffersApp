@@ -137,7 +137,6 @@ const OffersForm = ({ isEdit = false, offer }) => {
       }
       reset();
       setCustomArticles([]);
-      // console.log("DATA", body);
     } catch (error) {
       console.error(error);
     }

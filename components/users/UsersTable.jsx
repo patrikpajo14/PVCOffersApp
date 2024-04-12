@@ -8,7 +8,7 @@ import {
 } from "@/components/table";
 import { useRouter } from "next/navigation";
 import UsersTableRow from "./UsersTableRow";
-import { useGetUsers } from "@/app/actions/GetUsers";
+import {useDeleteUser, useGetUsers} from "@/app/actions/GetUsers";
 
 const TABLE_HEAD = [
   { id: "id", label: "ID", align: "left" },
@@ -25,18 +25,10 @@ export default function UsersTable() {
 
   const { data: users, isLoading } = useGetUsers();
 
-  //const { mutate: deleteOffer } = useDeleteOffer();
+  const { mutate: deleteUser } = useDeleteUser();
 
   const handleDeleteRow = (id) => {
-    //deleteOffer(id);
-  };
-
-  const handleEditRow = (id) => {
-    push(`/dashboard/offers/${id}`);
-  };
-
-  const handleViewRow = (id) => {
-    push(`/dashboard/offers/${id}/view`);
+    deleteUser(id);
   };
 
   return (
@@ -55,7 +47,7 @@ export default function UsersTable() {
                   key={row.id}
                   row={row}
                   onDeleteRow={() => handleDeleteRow(row.id)}
-                  onEditRow={() => handleEditRow(row.id)}
+                  // onEditRow={() => handleEditRow(row.id)}
                 />
               ))}
             <TableEmptyRows
