@@ -2,8 +2,8 @@ import Nav from "@/components/Nav";
 import Sidebar from "@/components/Sidebar";
 import "@/styles/globals.css";
 import getCurrentUser from "@/app/actions/GetCurrentUser";
-import useAuthStore from "@/app/store/AuthStore";
 import Image from "next/image";
+import PageLoader from "@/components/PageLoader/PageLoader";
 
 export const metadata = {
   title: "Dashboard",
@@ -12,8 +12,10 @@ export const metadata = {
 
 const DashboardLayout = async ({ children }) => {
     const currentUser = await getCurrentUser();
-
-    if(currentUser.activated === 0 && currentUser.role === 0){
+    if(!currentUser){
+        return(<PageLoader/>)
+    }
+    if(currentUser?.activated === 0 && currentUser?.role === 0){
         return (
             <>
                 <section className="container-max">
